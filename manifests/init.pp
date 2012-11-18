@@ -26,6 +26,12 @@
 # Copyright 2011 Eivind Uggedal <eivind@uggedal.com>
 #
 class monit (
+  $ensure     = present,
+  $admin      = undef,
+  $mailserver = 'localhost',
+  $mailformat = "from: monit_${::hostname}@${::domain}",
+  $interval   = '60',
+  $logfile    = $monit::params::logfile,
 ) inherits monit::params {
 
   $conf_include = "${monit::params::conf_dir}/*"

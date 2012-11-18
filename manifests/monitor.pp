@@ -30,7 +30,7 @@
 define monit::monitor (
   $pidfile,
   $ensure       = present,
-  $ip_port      = 0,
+  $port_check   = undef,
   $socket       = undef,
   $checks       = [ ],
   $start_script = "/etc/init.d/${name} start",

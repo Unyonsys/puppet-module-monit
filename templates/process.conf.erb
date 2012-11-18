@@ -1,8 +1,8 @@
 check process <%= @name %> with pidfile <%= @pidfile %>
   start program = "<%= @start_script %>"
   stop program  = "<%= @stop_script %>"
-<% if @ip_port.to_i > 0 -%>
-  if failed port <%= @ip_port %> then restart
+<% if @port_check -%>
+  if failed <%= @port_check %> then restart
 <% elsif @socket -%>
   if failed unixsocket <%= @socket %> then restart
 <% end -%>
