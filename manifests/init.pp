@@ -26,18 +26,16 @@
 # Copyright 2011 Eivind Uggedal <eivind@uggedal.com>
 #
 class monit (
-  $ensure   = present,
-  $admin    = undef,
-  $interval = 60,
-  $logfile  = $monit::params::logfile,
 ) inherits monit::params {
 
   $conf_include = "${monit::params::conf_dir}/*"
 
   if ($ensure == 'present') {
     $run_service = true
+    $svc_ensure  = 'running'
   } else {
     $run_service = false
+    $svc_ensure  = 'stopped'
   }
 
   package { $monit::params::monit_package:
@@ -77,7 +75,7 @@ class monit (
   }
 
   service { $monit::params::monit_service:
-    ensure     => $ensure,
+    ensure     => $svc_ensure,
     enable     => $run_service,
     hasrestart => true,
     hasstatus  => true,
